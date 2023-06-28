@@ -13,12 +13,16 @@ const getPrice = async (req, res) => {
       return res.status(404).json({ error: "Product not found" });
     }
 
-    const specialPrice = user.metadata.precios_especiales?.find(
+
+    const specialPrice = user.metadata?.precios_especiales?.find(
       (item) => item.nombre_producto === nombre_producto
     )?.precio_especial_personal;
-    const price = specialPrice || product.precio_base;
-
+    
+    const price = specialPrice !== undefined ? specialPrice : product.precio_base;
+    
     res.json({ price });
+    
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to fetch price" });
