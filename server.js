@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 4000;
 // Database connection
 dbConnection();
 
-;
 
 // Routes
 app.get("/", (req, res) => {
